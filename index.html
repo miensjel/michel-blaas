@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Michel Blaas — Productontwerper</title>
+<link rel="stylesheet" href="styles.css" />
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body class="lang-nl">
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="left">
+    <button class="hamburger" aria-label="Menu" aria-controls="menu" aria-expanded="false" id="hamburger-btn">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="logo">Michel<sup>MB</sup></div>
+  </div>
+  <nav class="primary-nav">
+    <a href="index.html" class="home-link">Home</a>
+    <a href="#werk"><span lang="nl">Werk</span><span lang="en">Work</span></a>
+    <a href="#proces"><span lang="nl">Proces</span><span lang="en">Process</span></a>
+    <a href="about.html"><span lang="nl">Over</span><span lang="en">About</span></a>
+    <a href="journal.html"><span lang="nl">Logboek</span><span lang="en">Journal</span></a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="right">
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button type="button" data-set-lang="nl" class="active">NL</button>
+      <button type="button" data-set-lang="en">EN</button>
+    </div>
+    <div class="availability">
+      <span class="dot"></span>
+      <span lang="nl">Open voor opdrachten</span>
+      <span lang="en">Open for commissions</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===== SIDE-DRAWER MENU ===== -->
+<div class="menu-backdrop" id="menu-backdrop" aria-hidden="true"></div>
+<aside class="menu-overlay" id="menu" aria-hidden="true">
+  <nav class="big" aria-label="Hoofdmenu">
+    <a href="#hero" data-menu-link class="home-link-overlay">
+      <span class="n">№ 01</span>
+      <span><em>Home</em></span>
+      <span class="arr">↘</span>
+    </a>
+    <a href="#werk" data-menu-link>
+      <span class="n">№ 02</span>
+      <span><span lang="nl">Werk</span><span lang="en">Work</span></span>
+      <span class="arr">↘</span>
+    </a>
+    <a href="#proces" data-menu-link>
+      <span class="n">№ 03</span>
+      <span><span lang="nl">Proces</span><span lang="en">Process</span></span>
+      <span class="arr">↘</span>
+    </a>
+    <a href="about.html" data-menu-link>
+      <span class="n">№ 04</span>
+      <span><span lang="nl">Over mij</span><span lang="en">About</span></span>
+      <span class="arr">↗</span>
+    </a>
+    <a href="journal.html" data-menu-link>
+      <span class="n">№ 05</span>
+      <span><span lang="nl">Logboek</span><span lang="en">Journal</span></span>
+      <span class="arr">↗</span>
+    </a>
+    <a href="#contact" data-menu-link>
+      <span class="n">№ 06</span>
+      <span>Contact</span>
+      <span class="arr">↘</span>
+    </a>
+  </nav>
+  <footer>
+    <div>
+      <div lang="nl">Delft · Nederland</div>
+      <div lang="en">Delft · The Netherlands</div>
+      <div><a href="mailto:michelblaas@caiway.net">michelblaas@caiway.net</a></div>
+    </div>
+    <div>
+      <div lang="nl">Op zoek naar atelier­ruimte</div>
+      <div lang="en">Looking for studio space</div>
+      <div lang="nl">Beschikbaar voor opdrachten</div>
+      <div lang="en">Available for commissions</div>
+    </div>
+    <div class="col-end">
+      <div>© 2026 Michel Blaas</div>
+      <div lang="nl">Interactief portfolio</div>
+      <div lang="en">Interactive portfolio</div>
+    </div>
+  </footer>
+</aside>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero" data-screen-label="01 Hero">
+  <div class="hero-grid">
+    <div>
+      <div class="mono" style="margin-bottom:24px;color:var(--ink-soft)">
+        <span lang="nl">№ 01 — Portfolio · Productontwerp · Delft / Den Haag</span>
+        <span lang="en">№ 01 — Portfolio · Product design · Delft / The Hague</span>
+      </div>
+      <h1>
+        <span lang="nl">Objecten <br/><em>om aan te</em> <br/>raken<span class="small">.</span></span>
+        <span lang="en">Objects <br/><em>you can</em> <br/>touch<span class="small">.</span></span>
+      </h1>
+      <dl class="hero-meta">
+        <dt>Discipline</dt>
+        <dd>
+          <span lang="nl">Industrieel ontwerp, meubel, verlichting</span>
+          <span lang="en">Industrial design, furniture, lighting</span>
+        </dd>
+        <dt><span lang="nl">Methode</span><span lang="en">Method</span></dt>
+        <dd>
+          <span lang="nl">Schets · CAD · 3D-print · Prototype</span>
+          <span lang="en">Sketch · CAD · 3D print · Prototype</span>
+        </dd>
+        <dt><span lang="nl">Materialen</span><span lang="en">Materials</span></dt>
+        <dd>
+          <span lang="nl">Kunststof, hout, metaal, textiel, elektronica</span>
+          <span lang="en">Plastics, wood, metal, textile, electronics</span>
+        </dd>
+        <dt>Status</dt>
+        <dd>
+          <span lang="nl">Open voor opdrachten — najaar 2026</span>
+          <span lang="en">Open for commissions — autumn 2026</span>
+        </dd>
+      </dl>
+    </div>
+
+    <div class="hero-canvas">
+      <canvas data-model="monolith"
+              data-dist="5.6"
+              data-height="1.6"
+              data-speed="0.5"></canvas>
+      <div class="hint">
+        <span class="arrows">↔</span>
+        <span lang="nl">Sleep om te draaien</span>
+        <span lang="en">Drag to rotate</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <span lang="nl">Scroll · 06 werken</span>
+    <span lang="en">Scroll · 06 works</span>
+  </div>
+</section>
+
+<!-- ===== TICKER ===== -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span lang="nl">
+      <em class="italic">Lijn</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Volume</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Aanraking</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Materie</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Gewicht</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Schaduw</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Stilte</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Lijn</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Volume</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Aanraking</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Materie</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Gewicht</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Schaduw</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Stilte</em> &nbsp; <span class="star">✦</span> &nbsp;
+    </span>
+    <span lang="en">
+      <em class="italic">Line</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Volume</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Touch</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Matter</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Weight</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Shadow</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Silence</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Line</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Volume</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Touch</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Matter</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Weight</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Shadow</em> &nbsp; <span class="star">✦</span> &nbsp;
+      <em class="italic">Silence</em> &nbsp; <span class="star">✦</span> &nbsp;
+    </span>
+  </div>
+</div>
+
+<!-- ===== WERK ===== -->
+<section class="werk container" id="werk" data-screen-label="02 Werk">
+  <div class="section-label reveal">
+    <span class="num">№ 02</span>
+    <span>
+      <span lang="nl">Geselecteerd werk · 2022 — 2026</span>
+      <span lang="en">Selected work · 2022 — 2026</span>
+    </span>
+    <span>
+      <span lang="nl">06 stuks</span>
+      <span lang="en">06 pieces</span>
+    </span>
+  </div>
+  <h2 class="section-heading reveal">
+    <span lang="nl">Zes objecten,<br/><em>zes verhalen.</em></span>
+    <span lang="en">Six objects,<br/><em>six stories.</em></span>
+  </h2>
+
+  <div class="works-grid">
+
+    <!-- Chair -->
+    <article class="work size-lg reveal">
+      <div class="work-canvas">
+        <canvas data-model="chair" data-dist="5" data-height="0.9" data-speed="0.6"></canvas>
+        <div class="pill">
+          <span lang="nl">Meubel</span><span lang="en">Furniture</span>
+        </div>
+        <div class="year">2026</div>
+        <div class="drag-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 12h10M9 8l-2 4 2 4M15 8l2 4-2 4"/>
+          </svg>
+          <span lang="nl">Sleep</span><span lang="en">Drag</span>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="title-row">
+          <h3>Halma <em>01</em></h3>
+          <span class="price">
+            <span lang="nl">Bachelorproject — prototype</span>
+            <span lang="en">Bachelor project — prototype</span>
+          </span>
+        </div>
+        <p>
+          <span lang="nl">Een loungestoel gebouwd rond één continue rugcurve. De armleuningen lopen in één lijn door naar de zitting; geen las, geen scharnier. Ontwikkeld als afstudeerproject.</span>
+          <span lang="en">A lounge chair built around one continuous back curve. The armrests flow uninterrupted into the seat — no weld, no hinge. Developed as a graduation project.</span>
+        </p>
+        <div class="specs">
+          <span><span lang="nl">Essenhout</span><span lang="en">Ash wood</span></span>
+          <span><span lang="nl">Linnen 320g</span><span lang="en">Linen 320g</span></span>
+          <span><span lang="nl">Inklapbaar</span><span lang="en">Foldable</span></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Lamp -->
+    <article class="work size-md reveal">
+      <div class="work-canvas">
+        <canvas data-model="lamp" data-dist="5" data-height="1" data-speed="0.7"></canvas>
+        <div class="pill"><span lang="nl">Verlichting</span><span lang="en">Lighting</span></div>
+        <div class="year">2025</div>
+        <div class="drag-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 12h10M9 8l-2 4 2 4M15 8l2 4-2 4"/>
+          </svg>
+          <span lang="nl">Sleep</span><span lang="en">Drag</span>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="title-row">
+          <h3>Boog <em><span lang="nl">vloerlamp</span><span lang="en">floor lamp</span></em></h3>
+          <span class="price"><span lang="nl">Studieproject</span><span lang="en">Student project</span></span>
+        </div>
+        <p>
+          <span lang="nl">Een 1,1 meter lange overhang in geanodiseerd aluminium. De lampkap kan met de hand in elke hoek vastklikken.</span>
+          <span lang="en">A 1.1 m overhanging arc in anodised aluminium. The shade clicks into any angle by hand.</span>
+        </p>
+        <div class="specs">
+          <span><span lang="nl">Aluminium</span><span lang="en">Aluminium</span></span>
+          <span>2700K LED</span>
+          <span><span lang="nl">3 standen</span><span lang="en">3 modes</span></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Vase -->
+    <article class="work size-md reveal">
+      <div class="work-canvas">
+        <canvas data-model="vase" data-dist="5.5" data-height="1.3" data-speed="0.8"></canvas>
+        <div class="pill"><span lang="nl">Keramiek</span><span lang="en">Ceramics</span></div>
+        <div class="year">2025</div>
+        <div class="drag-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 12h10M9 8l-2 4 2 4M15 8l2 4-2 4"/>
+          </svg>
+          <span lang="nl">Sleep</span><span lang="en">Drag</span>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="title-row">
+          <h3>Knoop <em><span lang="nl">vaas</span><span lang="en">vase</span></em></h3>
+          <span class="price"><span lang="nl">Handgedraaid</span><span lang="en">Hand-thrown</span></span>
+        </div>
+        <p>
+          <span lang="nl">Drie volumes die elkaar onderbreken — een vorm die voortkomt uit het zoeken naar het kleinste contactpunt tussen klei en pottenbakkersschijf.</span>
+          <span lang="en">Three volumes interrupting each other — a form that emerges from searching for the smallest possible contact point between clay and wheel.</span>
+        </p>
+        <div class="specs">
+          <span><span lang="nl">Steengoed</span><span lang="en">Stoneware</span></span>
+          <span><span lang="nl">Mat glazuur</span><span lang="en">Matte glaze</span></span>
+          <span>1,2 kg</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Speaker -->
+    <article class="work size-lg reveal">
+      <div class="work-canvas">
+        <canvas data-model="speaker" data-dist="5" data-height="1.1" data-speed="0.7"></canvas>
+        <div class="pill"><span lang="nl">Elektronica</span><span lang="en">Electronics</span></div>
+        <div class="year">2024</div>
+        <div class="drag-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 12h10M9 8l-2 4 2 4M15 8l2 4-2 4"/>
+          </svg>
+          <span lang="nl">Sleep</span><span lang="en">Drag</span>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="title-row">
+          <h3>Toren <em>speaker</em></h3>
+          <span class="price"><span lang="nl">Concept</span><span lang="en">Concept</span></span>
+        </div>
+        <p>
+          <span lang="nl">360° geluid in een cilinder van 12 cm breed. Eén knop, geen scherm, geen app. Een onderzoek naar de minimale interface voor luisteren.</span>
+          <span lang="en">360° sound in a 12 cm-wide cylinder. One knob, no screen, no app. A study in the minimal interface for listening.</span>
+        </p>
+        <div class="specs">
+          <span><span lang="nl">Massief eiken</span><span lang="en">Solid oak</span></span>
+          <span><span lang="nl">Messing</span><span lang="en">Brass</span></span>
+          <span>Bluetooth 5.3</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Stool -->
+    <article class="work size-sm reveal">
+      <div class="work-canvas">
+        <canvas data-model="stool" data-dist="5" data-height="0.9" data-speed="0.7"></canvas>
+        <div class="pill"><span lang="nl">Meubel</span><span lang="en">Furniture</span></div>
+        <div class="year">2023</div>
+        <div class="drag-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 12h10M9 8l-2 4 2 4M15 8l2 4-2 4"/>
+          </svg>
+          <span lang="nl">Sleep</span><span lang="en">Drag</span>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="title-row">
+          <h3>Cork <em>06</em></h3>
+          <span class="price"><span lang="nl">Editie van 12</span><span lang="en">Edition of 12</span></span>
+        </div>
+        <p>
+          <span lang="nl">Een lichte kruk uit één blok kurk, op drie eikenhouten poten. Drie poten omdat een kruk niet hoeft te wankelen om eerlijk te zijn.</span>
+          <span lang="en">A light stool from a single block of cork, on three oak legs. Three legs because a stool doesn't need to wobble to be honest.</span>
+        </p>
+        <div class="specs">
+          <span><span lang="nl">Kurk</span><span lang="en">Cork</span></span>
+          <span><span lang="nl">Eiken</span><span lang="en">Oak</span></span>
+          <span>2,1 kg</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Kettle -->
+    <article class="work size-sm reveal">
+      <div class="work-canvas">
+        <canvas data-model="kettle" data-dist="4.2" data-height="0.7" data-speed="0.6"></canvas>
+        <div class="pill"><span lang="nl">Object</span><span lang="en">Object</span></div>
+        <div class="year">2022</div>
+        <div class="drag-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 12h10M9 8l-2 4 2 4M15 8l2 4-2 4"/>
+          </svg>
+          <span lang="nl">Sleep</span><span lang="en">Drag</span>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="title-row">
+          <h3>Theefluit <em>nº 3</em></h3>
+          <span class="price">Prototype</span>
+        </div>
+        <p>
+          <span lang="nl">Een ketel die in plaats van te fluiten een lage toon zingt. Een studie naar geluid als signaal.</span>
+          <span lang="en">A kettle that, instead of whistling, sings a low tone. A study of sound as a signal.</span>
+        </p>
+        <div class="specs">
+          <span><span lang="nl">Messing</span><span lang="en">Brass</span></span>
+          <span><span lang="nl">Walnoothout</span><span lang="en">Walnut</span></span>
+          <span>1,2 L</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Totem -->
+    <article class="work size-sm reveal">
+      <div class="work-canvas" style="aspect-ratio: 5/4;">
+        <canvas data-model="monolith" data-dist="5.6" data-height="1.4" data-speed="0.9" data-bg="0xe2dccf"></canvas>
+        <div class="pill"><span lang="nl">Sculptuur</span><span lang="en">Sculpture</span></div>
+        <div class="year">2026</div>
+        <div class="drag-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 12h10M9 8l-2 4 2 4M15 8l2 4-2 4"/>
+          </svg>
+          <span lang="nl">Sleep</span><span lang="en">Drag</span>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="title-row">
+          <h3>Totem <em>0</em></h3>
+          <span class="price"><span lang="nl">Uniek</span><span lang="en">Unique</span></span>
+        </div>
+        <p>
+          <span lang="nl">Een verticale studie in proportie en materiaal — terracotta, room en messing op één as. Onderdeel van een serie van drie.</span>
+          <span lang="en">A vertical study in proportion and material — terracotta, cream and brass on one axis. Part of a series of three.</span>
+        </p>
+        <div class="specs">
+          <span><span lang="nl">Keramiek</span><span lang="en">Ceramics</span></span>
+          <span><span lang="nl">Messing</span><span lang="en">Brass</span></span>
+          <span>1/3</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===== STUDIO ===== -->
+<section class="studio container" id="studio" data-screen-label="03 Studio">
+  <div class="section-label reveal">
+    <span class="num">№ 03</span>
+    <span>
+      <span lang="nl">Over de ontwerper</span>
+      <span lang="en">About the designer</span>
+    </span>
+    <span>
+      <span lang="nl">Sinds 2022</span>
+      <span lang="en">Since 2022</span>
+    </span>
+  </div>
+
+  <div class="studio-grid">
+    <div>
+      <h2 class="reveal">
+        <span lang="nl">Een rustige <br/><em>vorm</em> in een <br/>luide wereld.</span>
+        <span lang="en">A quiet <br/><em>form</em> in a <br/>loud world.</span>
+      </h2>
+    </div>
+    <div class="reveal">
+      <p class="lede">
+        <span lang="nl">Ik ben Michel Blaas, 24 jaar, productontwerper uit Delft. Ik ontwerp objecten die <em>werken</em> — meubels, lampen, gereedschappen; dingen die je elke dag in je hand neemt omdat ze beter zijn dan wat er al lag.</span>
+        <span lang="en">I'm Michel Blaas, 24, a product designer based in Delft. I design objects that <em>actually work</em> — furniture, lamps, tools; things you reach for every day because they're better than what came before.</span>
+      </p>
+      <div class="body">
+        <p lang="nl">Op dit moment heb ik nog geen vast atelier — ik ben op zoek naar een ruimte in Delft of omgeving. Tot dan ontstaat het werk in 3D-print­labs, gedeelde werkplaatsen en aan de keukentafel.</p>
+        <p lang="en">I don't have a dedicated studio yet — I'm currently looking for a space in or around Delft. Until then, the work happens in 3D print labs, shared workshops, and at the kitchen table.</p>
+        <p lang="nl">Voor opdrachten ben ik beschikbaar voor productontwerp, freelance design en consultancy rond materiaalkeuze. Geen branding, geen apps, geen pitchdecks.</p>
+        <p lang="en">For commissions I'm available for product design, freelance design and material consultancy. No branding, no apps, no pitch decks.</p>
+      </div>
+
+      <ul class="client-list">
+        <li>
+          <span><span lang="nl">Master · Next Level Engineering</span><span lang="en">Master · Next Level Engineering</span></span>
+          <span>2025–26</span>
+        </li>
+        <li>
+          <span><span lang="nl">Bachelor · IPO, Haagse Hogeschool</span><span lang="en">Bachelor · IPD, THUAS</span></span>
+          <span>2021–25</span>
+        </li>
+        <li>
+          <span><span lang="nl">Afstudeerproject</span><span lang="en">Graduation project</span></span>
+          <span>2025</span>
+        </li>
+        <li>
+          <span><span lang="nl">Meeloopstage</span><span lang="en">Internship</span></span>
+          <span>2024</span>
+        </li>
+        <li>
+          <span><span lang="nl">Minor in Polen · half jaar</span><span lang="en">Minor in Poland · semester</span></span>
+          <span>2023</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="bio-card reveal" style="grid-column: 1;">
+      <div class="bio-portrait">
+        <svg class="portrait-svg" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-label="Portret van Michel">
+          <defs>
+            <radialGradient id="halo-1" cx="50%" cy="42%" r="60%">
+              <stop offset="0%" stop-color="#f0b341" stop-opacity="0.95"/>
+              <stop offset="55%" stop-color="#d65a1f" stop-opacity="0.62"/>
+              <stop offset="100%" stop-color="#d65a1f" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="hair-1" x1="50%" y1="0%" x2="50%" y2="100%">
+              <stop offset="0%" stop-color="#f1d68a"/>
+              <stop offset="100%" stop-color="#b88f3e"/>
+            </linearGradient>
+            <linearGradient id="skin-1" x1="50%" y1="0%" x2="50%" y2="100%">
+              <stop offset="0%" stop-color="#f6d9b6"/>
+              <stop offset="100%" stop-color="#dbb088"/>
+            </linearGradient>
+            <linearGradient id="iris-1" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#67a7e0"/>
+              <stop offset="100%" stop-color="#2f6ba8"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Halo / sun -->
+          <circle cx="200" cy="210" r="190" fill="url(#halo-1)"/>
+          <circle cx="338" cy="92" r="5" fill="#fff" opacity="0.9"/>
+          <text x="58" y="80" font-family="Instrument Serif, serif" font-size="22" fill="#f0b341" opacity="0.85">✦</text>
+
+          <!-- Long mullet hair (behind shoulders) -->
+          <g class="mullet">
+            <path d="M118 210 C 88 260 84 340 102 400 C 118 440 152 458 200 458 C 248 458 282 440 298 400 C 316 340 312 260 282 210 Z" fill="url(#hair-1)"/>
+            <!-- Mullet inner strand definition -->
+            <path d="M150 360 Q 175 420 200 432 Q 225 420 250 360" stroke="#8d6a2a" stroke-width="2.5" fill="none" opacity="0.45"/>
+            <path d="M168 380 Q 185 415 200 422" stroke="#8d6a2a" stroke-width="1.5" fill="none" opacity="0.35"/>
+            <path d="M232 380 Q 215 415 200 422" stroke="#8d6a2a" stroke-width="1.5" fill="none" opacity="0.35"/>
+          </g>
+
+          <!-- Shirt (V-neck olive tee) -->
+          <path d="M40 500 L 40 430 Q 40 388 92 376 Q 146 364 200 364 Q 254 364 308 376 Q 360 388 360 430 L 360 500 Z" fill="#3b3b32"/>
+          <!-- Collar V -->
+          <path d="M180 364 L 200 396 L 220 364" stroke="#1a1815" stroke-width="3.5" fill="none" stroke-linejoin="round"/>
+          <!-- Shirt fold highlight -->
+          <path d="M104 410 Q 100 460 110 498" stroke="#4f4f43" stroke-width="2" fill="none" opacity="0.7"/>
+
+          <!-- Neck -->
+          <path d="M172 304 L 172 372 Q 200 386 228 372 L 228 304 Z" fill="url(#skin-1)"/>
+          <!-- Neck shadow -->
+          <path d="M172 348 Q 200 362 228 348 L 228 372 Q 200 386 172 372 Z" fill="#c89870" opacity="0.5"/>
+
+          <!-- Ears -->
+          <ellipse cx="110" cy="226" rx="15" ry="25" fill="url(#skin-1)"/>
+          <ellipse cx="290" cy="226" rx="15" ry="25" fill="url(#skin-1)"/>
+          <ellipse cx="110" cy="229" rx="6" ry="12" fill="#a87a52" opacity="0.55"/>
+          <ellipse cx="290" cy="229" rx="6" ry="12" fill="#a87a52" opacity="0.55"/>
+
+          <!-- Head -->
+          <ellipse cx="200" cy="222" rx="96" ry="112" fill="url(#skin-1)"/>
+          <!-- Side shadow on the right cheek -->
+          <path d="M286 200 Q 300 250 290 295 Q 270 322 240 326 Q 274 280 286 200 Z" fill="#c7986c" opacity="0.22"/>
+
+          <!-- HAIR TOP (crown with confident silhouette + side curtains) -->
+          <path d="M104 205
+                   C 88 138 130 90 178 84
+                   Q 200 82 222 84
+                   C 270 90 312 138 296 205
+                   C 290 178 268 168 250 170
+                   Q 280 142 260 124
+                   Q 230 105 200 105
+                   Q 170 105 140 124
+                   Q 120 142 150 170
+                   C 132 168 110 178 104 205 Z"
+                fill="url(#hair-1)"/>
+          <!-- Fringe sweep -->
+          <path d="M152 142 Q 175 134 200 142 Q 224 152 246 172 Q 218 168 188 170 Q 162 170 152 142 Z" fill="#caa14a"/>
+          <!-- Highlight streak -->
+          <path d="M150 130 Q 200 110 250 130" stroke="#fbeab5" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.85"/>
+
+          <!-- Sideburns -->
+          <path d="M104 205 Q 100 235 112 254 Q 124 244 128 218 Z" fill="url(#hair-1)"/>
+          <path d="M296 205 Q 300 235 288 254 Q 276 244 272 218 Z" fill="url(#hair-1)"/>
+
+          <!-- Eyebrows -->
+          <path d="M152 200 Q 170 192 192 198" stroke="#9c7530" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+          <path d="M248 200 Q 230 192 208 198" stroke="#9c7530" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+
+          <!-- Eyes -->
+          <g class="eyes">
+            <ellipse cx="172" cy="226" rx="13" ry="9.5" fill="#fffaf0"/>
+            <ellipse cx="228" cy="226" rx="13" ry="9.5" fill="#fffaf0"/>
+            <circle cx="172" cy="226" r="7.6" fill="url(#iris-1)"/>
+            <circle cx="228" cy="226" r="7.6" fill="url(#iris-1)"/>
+            <circle cx="172" cy="226" r="3.4" fill="#0a0a0a"/>
+            <circle cx="228" cy="226" r="3.4" fill="#0a0a0a"/>
+            <circle cx="174.6" cy="223" r="1.9" fill="#fff"/>
+            <circle cx="230.6" cy="223" r="1.9" fill="#fff"/>
+            <circle cx="170" cy="229" r="0.9" fill="#fff" opacity="0.7"/>
+            <circle cx="226" cy="229" r="0.9" fill="#fff" opacity="0.7"/>
+          </g>
+
+          <!-- Nose -->
+          <path d="M200 240 C 197 262 200 274 209 279 Q 200 284 195 280" stroke="#bc8e62" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+          <!-- Mouth: smile -->
+          <path d="M168 298 Q 200 324 232 298" stroke="#9c4234" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path d="M180 299 Q 192 290 200 293 Q 208 290 220 299" stroke="#b8675a" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.55"/>
+
+          <!-- Cheek blush -->
+          <ellipse cx="140" cy="262" rx="18" ry="11" fill="#e89888" opacity="0.4"/>
+          <ellipse cx="260" cy="262" rx="18" ry="11" fill="#e89888" opacity="0.4"/>
+          <!-- Cheek highlight -->
+          <ellipse cx="155" cy="236" rx="9" ry="5" fill="#fff" opacity="0.16"/>
+          <ellipse cx="245" cy="236" rx="9" ry="5" fill="#fff" opacity="0.16"/>
+        </svg>
+        <div class="tag">
+          <span lang="nl">— Portret</span>
+          <span lang="en">— Portrait</span>
+        </div>
+        <div class="tag-2">2026</div>
+      </div>
+      <dl class="bio-details">
+        <dt><span lang="nl">Geboren</span><span lang="en">Born</span></dt>
+        <dd>2002</dd>
+
+        <dt><span lang="nl">Opleiding</span><span lang="en">Education</span></dt>
+        <dd>
+          <span lang="nl">MSc Next Level Engineering · 2025–26<br/><br/>Bachelor Industrieel Product Ontwerpen (IPO) · 2021–25<br/><br/>De Haagse Hogeschool · Delft</span>
+          <span lang="en">MSc Next Level Engineering · 2025–26<br/><br/>Bachelor Industrial Product Design (IPD) · 2021–25<br/><br/>The Hague Univ. of Applied Sciences · Delft</span>
+        </dd>
+
+        <dt><span lang="nl">Locatie</span><span lang="en">Location</span></dt>
+        <dd>
+          <span lang="nl">Delft · op zoek naar atelier</span>
+          <span lang="en">Delft · seeking studio</span>
+        </dd>
+
+        <dt><span lang="nl">Talen</span><span lang="en">Languages</span></dt>
+        <dd>NL · EN · PL</dd>
+
+        <dt><span lang="nl">Werkt met</span><span lang="en">Works with</span></dt>
+        <dd>
+          <span lang="nl">Kunststof, hout, metaal, textiel en elektronica</span>
+          <span lang="en">Plastics, wood, metal, textile and electronics</span>
+        </dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCES ===== -->
+<section class="proces container" id="proces" data-screen-label="04 Proces">
+  <div class="section-label reveal">
+    <span class="num">№ 04</span>
+    <span><span lang="nl">Werkwijze</span><span lang="en">Method</span></span>
+    <span>
+      <span lang="nl">Van schets tot oplage</span>
+      <span lang="en">From sketch to edition</span>
+    </span>
+  </div>
+  <h2 class="section-heading reveal">
+    <span lang="nl">Vijf stappen,<br/><em>één gesprek.</em></span>
+    <span lang="en">Five steps,<br/><em>one conversation.</em></span>
+  </h2>
+
+  <div class="proces-grid">
+    <div class="proces-step reveal">
+      <span class="num">01 / <span lang="nl">Gesprek</span><span lang="en">Talk</span></span>
+      <h4><span lang="nl">Onder­zoek</span><span lang="en">Re­search</span></h4>
+      <p>
+        <span lang="nl">We praten over de plek waar het object zal leven. Over wie het zal aanraken, en hoe vaak. Geen briefing, een gesprek.</span>
+        <span lang="en">We talk about where the object will live. About who will touch it, and how often. Not a briefing — a conversation.</span>
+      </p>
+    </div>
+    <div class="proces-step reveal">
+      <span class="num">02 / <span lang="nl">Schets</span><span lang="en">Sketch</span></span>
+      <h4><em><span lang="nl">Hand</span><span lang="en">Hand</span></em></h4>
+      <p>
+        <span lang="nl">Potlood, pen — eerst schetsen. Zoekend naar de beste oplossing en vormgeving. Een week of twee in een schrift met kalkpapier voordat er ook maar één lijn digitaal wordt.</span>
+        <span lang="en">Pencil, pen — sketch first. Looking for the best solution and form. A week or two in a notebook with tracing paper before a single line goes digital.</span>
+      </p>
+    </div>
+    <div class="proces-step reveal">
+      <span class="num">03 / Model</span>
+      <h4>CAD <span lang="nl">&amp; 3D-print</span><span lang="en">&amp; 3D print</span></h4>
+      <p>
+        <span lang="nl">Digitaal model voor proportie, 3D-print voor gewicht en gevoel. Beide bestaan naast elkaar — geen één zonder de ander.</span>
+        <span lang="en">Digital model for proportion, 3D print for weight and feel. The two coexist — neither one without the other.</span>
+      </p>
+    </div>
+    <div class="proces-step reveal">
+      <span class="num">04 / <span lang="nl">Mockup</span><span lang="en">Mock-up</span></span>
+      <h4>Proto<em>type</em></h4>
+      <p>
+        <span lang="nl">Eerste exemplaar in eindmateriaal, gemaakt met de productiepartner. We slijpen samen aan elk detail.</span>
+        <span lang="en">First piece in final material, made with the production partner. We polish every detail together.</span>
+      </p>
+    </div>
+    <div class="proces-step reveal">
+      <span class="num">05 / <span lang="nl">Oplage</span><span lang="en">Edition</span></span>
+      <h4>Pro­ductie</h4>
+      <p>
+        <span lang="nl">Kleine oplages, genummerd en gesigneerd. Geen voorraad — elk stuk wordt na bestelling gemaakt.</span>
+        <span lang="en">Small editions, numbered and signed. No stock — each piece is made after ordering.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact container" id="contact" data-screen-label="05 Contact">
+  <div class="section-label reveal">
+    <span class="num">№ 05</span>
+    <span><span lang="nl">Aan tafel</span><span lang="en">At the table</span></span>
+    <span>Delft · NL</span>
+  </div>
+  <h2 class="reveal">
+    <span lang="nl">Laten <em>we</em><br/>iets <em>maken.</em></span>
+    <span lang="en">Let <em>us</em><br/>make <em>something.</em></span>
+  </h2>
+
+  <div class="contact-grid">
+    <div class="reveal">
+      <a class="email serif italic" href="mailto:michelblaas@caiway.net">michelblaas@caiway.net</a>
+      <p class="mono" style="margin-top:24px;color:var(--ink-soft)">
+        <span lang="nl">Antwoord binnen 48 uur.</span>
+        <span lang="en">Reply within 48 hours.</span>
+      </p>
+    </div>
+
+    <div class="channels reveal">
+      <a href="#" target="_blank" rel="noopener">
+        <span>IG</span>
+        <span>
+          <span lang="nl">@miensjel — projecten en proces</span>
+          <span lang="en">@miensjel — projects and process</span>
+        </span>
+        <span class="arrow">↗</span>
+      </a>
+      <a href="#" target="_blank" rel="noopener">
+        <span>LI</span>
+        <span>
+          <span lang="nl">LinkedIn — voor zakelijke opdrachten</span>
+          <span lang="en">LinkedIn — for business inquiries</span>
+        </span>
+        <span class="arrow">↗</span>
+      </a>
+      <a href="mailto:michelblaas@caiway.net">
+        <span>E</span>
+        <span>michelblaas@caiway.net</span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="logo-big italic">Michel.</div>
+  <div>
+    <div>© 2026 Michel Blaas</div>
+    <div>
+      <span lang="nl">Onafhankelijk ontwerper</span>
+      <span lang="en">Independent designer</span>
+    </div>
+  </div>
+  <div>
+    <div>Delft · NL</div>
+    <div>
+      <span lang="nl">Op zoek naar atelier­ruimte</span>
+      <span lang="en">Looking for studio space</span>
+    </div>
+  </div>
+  <div class="col-end">
+    <div>
+      <span lang="nl">Site gebouwd 2026</span>
+      <span lang="en">Site built 2026</span>
+    </div>
+    <div>
+      <span lang="nl">Interactief 3D — sleep om te draaien</span>
+      <span lang="en">Interactive 3D — drag to rotate</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+// Language toggle + hamburger overlay
+(function () {
+  const body = document.body;
+
+  // ----- Language -----
+  const stored = (function () {
+    try { return localStorage.getItem('michel-lang'); } catch (e) { return null; }
+  })();
+  const initialLang = stored === 'en' || stored === 'nl' ? stored : 'nl';
+  setLang(initialLang);
+
+  function setLang(lang) {
+    body.classList.remove('lang-nl', 'lang-en');
+    body.classList.add('lang-' + lang);
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-set-lang]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.setLang === lang);
+    });
+    try { localStorage.setItem('michel-lang', lang); } catch (e) {}
+  }
+  document.querySelectorAll('[data-set-lang]').forEach(btn => {
+    btn.addEventListener('click', () => setLang(btn.dataset.setLang));
+  });
+
+  // ----- Hamburger overlay -----
+  const ham = document.getElementById('hamburger-btn');
+  const menu = document.getElementById('menu');
+  function openMenu() {
+    body.classList.add('menu-open');
+    ham.setAttribute('aria-expanded', 'true');
+    menu.setAttribute('aria-hidden', 'false');
+  }
+  function closeMenu() {
+    body.classList.remove('menu-open');
+    ham.setAttribute('aria-expanded', 'false');
+    menu.setAttribute('aria-hidden', 'true');
+  }
+  ham.addEventListener('click', () => {
+    if (body.classList.contains('menu-open')) closeMenu();
+    else openMenu();
+  });
+  document.querySelectorAll('[data-menu-link]').forEach(a => {
+    a.addEventListener('click', () => closeMenu());
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && body.classList.contains('menu-open')) closeMenu();
+  });
+  const backdrop = document.getElementById('menu-backdrop');
+  if (backdrop) backdrop.addEventListener('click', closeMenu);
+})();
+</script>
+<script type="module" src="scene.js"></script>
+</body>
+</html>
