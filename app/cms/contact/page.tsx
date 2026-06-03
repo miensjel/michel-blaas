@@ -4,8 +4,8 @@ import ContactEditForm from "@/components/cms/ContactEditForm";
 
 export const dynamic = "force-dynamic";
 
-export default function ContactPage() {
-  const data = getContact();
+export default async function ContactPage() {
+  const data = await getContact();
 
   return (
     <main style={{ padding: "44px 40px" }}>

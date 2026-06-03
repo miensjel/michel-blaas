@@ -18,13 +18,13 @@ export async function PATCH(
   const { id } = await params;
   const updates = (await req.json()) as Record<string, unknown>;
 
-  const works = getWorks();
+  const works = await getWorks();
   const idx = works.findIndex((w) => w.id === id);
   if (idx === -1) return Response.json({ error: "not found" }, { status: 404 });
 
   // Deep merge — allows partial updates (e.g. just body or just title)
   works[idx] = deepMerge(works[idx] as Record<string, unknown>, updates) as typeof works[0];
-  saveWorks(works);
+  await saveWorks(works);
   revalidatePath("/");
 
   return Response.json({ ok: true });

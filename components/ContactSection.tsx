@@ -4,8 +4,8 @@ import { getContact } from "@/lib/cms-store";
 
 const { contact } = home;
 
-export default function ContactSection() {
-  const cms = getContact();
+export default async function ContactSection() {
+  const cms = await getContact();
   return (
     <section
       id="contact"

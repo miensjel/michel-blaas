@@ -4,8 +4,8 @@ import { getProcess } from "@/lib/cms-store";
 
 const { process } = home;
 
-export default function ProcessSection() {
-  const cms = getProcess();
+export default async function ProcessSection() {
+  const cms = await getProcess();
   const bodyMap = new Map(cms.steps.map((s) => [s.num, s.body]));
   return (
     <section

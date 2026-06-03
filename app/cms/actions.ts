@@ -64,34 +64,34 @@ export async function createWork(fd: FormData) {
     .replace(/\s+/g, "-");
   if (!id) return;
   const item: WorkItem = { id, ...parseForm(fd) };
-  const works = getWorks();
-  saveWorks([...works, item]);
+  const works = await getWorks();
+  await saveWorks([...works, item]);
   revalidateSite();
   revalidatePath("/cms/dashboard");
   redirect("/cms/dashboard");
 }
 
 export async function updateWork(id: string, fd: FormData) {
-  const works = getWorks();
+  const works = await getWorks();
   const updated = works.map((w) => (w.id === id ? { id, ...parseForm(fd) } : w));
-  saveWorks(updated);
+  await saveWorks(updated);
   revalidateSite();
   revalidatePath("/cms/dashboard");
   redirect("/cms/dashboard");
 }
 
 export async function deleteWork(id: string) {
-  const works = getWorks();
-  saveWorks(works.filter((w) => w.id !== id));
+  const works = await getWorks();
+  await saveWorks(works.filter((w) => w.id !== id));
   revalidateSite();
   revalidatePath("/cms/dashboard");
 }
 
 export async function reorderWorks(ids: string[]) {
-  const works = getWorks();
+  const works = await getWorks();
   const map = new Map(works.map((w) => [w.id, w]));
   const reordered = ids.map((id) => map.get(id)).filter(Boolean) as WorkItem[];
-  saveWorks(reordered);
+  await saveWorks(reordered);
   revalidateSite();
   revalidatePath("/cms/dashboard");
 }
@@ -111,7 +111,7 @@ export async function updateStudio(
     },
     body,
   };
-  saveStudio(data);
+  await saveStudio(data);
   revalidateSite();
   revalidatePath("/cms/studio");
   return { ok: true };
@@ -135,7 +135,7 @@ export async function updateContact(
     },
     channels,
   };
-  saveContact(data);
+  await saveContact(data);
   revalidateSite();
   revalidatePath("/cms/contact");
   return { ok: true };
@@ -150,7 +150,7 @@ export async function updateProcess(
   const stepsJson = fd.get("steps_json") as string;
   const steps = stepsJson ? (JSON.parse(stepsJson) as ProcessData["steps"]) : [];
   const data: ProcessData = { steps };
-  saveProcess(data);
+  await saveProcess(data);
   revalidateSite();
   revalidatePath("/cms/process");
   return { ok: true };

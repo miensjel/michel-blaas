@@ -4,8 +4,8 @@ import ProcessEditForm from "@/components/cms/ProcessEditForm";
 
 export const dynamic = "force-dynamic";
 
-export default function ProcessPage() {
-  const data = getProcess();
+export default async function ProcessPage() {
+  const data = await getProcess();
 
   return (
     <main style={{ padding: "44px 40px" }}>

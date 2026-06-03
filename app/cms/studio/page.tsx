@@ -4,8 +4,8 @@ import StudioEditForm from "@/components/cms/StudioEditForm";
 
 export const dynamic = "force-dynamic";
 
-export default function StudioPage() {
-  const data = getStudio();
+export default async function StudioPage() {
+  const data = await getStudio();
 
   return (
     <main style={{ padding: "44px 40px" }}>

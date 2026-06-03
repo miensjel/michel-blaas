@@ -5,8 +5,8 @@ import { getWorks } from "@/lib/cms-store";
 
 const { works } = home;
 
-export default function WorksSection() {
-  const items = getWorks();
+export default async function WorksSection() {
+  const items = await getWorks();
 
   return (
     <section

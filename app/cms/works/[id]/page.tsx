@@ -12,7 +12,7 @@ export default async function WorkPage(props: {
   const { id } = await props.params;
   const isNew = id === "new";
 
-  const work = isNew ? null : (getWork(id) ?? null);
+  const work = isNew ? null : ((await getWork(id)) ?? null);
   if (!isNew && !work) notFound();
 
   const action = isNew ? createWork : updateWork.bind(null, id);

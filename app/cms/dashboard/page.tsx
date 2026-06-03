@@ -4,8 +4,8 @@ import WorksList from "@/components/cms/WorksList";
 
 export const dynamic = "force-dynamic";
 
-export default function CmsDashboard() {
-  const works = getWorks();
+export default async function CmsDashboard() {
+  const works = await getWorks();
 
   return (
     <main style={{ padding: "44px 40px" }}>

@@ -5,8 +5,8 @@ import { getStudio } from "@/lib/cms-store";
 
 const { studio } = home;
 
-export default function StudioSection() {
-  const cms = getStudio();
+export default async function StudioSection() {
+  const cms = await getStudio();
   return (
     <section
       id="studio"
