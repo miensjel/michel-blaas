@@ -1,9 +1,12 @@
 import Reveal from "@/components/Reveal";
 import { home } from "@/content/home";
+import { getProcess } from "@/lib/cms-store";
 
 const { process } = home;
 
 export default function ProcessSection() {
+  const cms = getProcess();
+  const bodyMap = new Map(cms.steps.map((s) => [s.num, s.body]));
   return (
     <section
       id="proces"
@@ -71,8 +74,8 @@ export default function ProcessSection() {
               )}
             </h4>
             <p style={{ fontSize: 13, lineHeight: 1.55, color: "var(--color-text-soft)", marginTop: "auto" }}>
-              <span lang="nl">{step.body.nl}</span>
-              <span lang="en">{step.body.en}</span>
+              <span lang="nl">{bodyMap.get(step.num)?.nl ?? step.body.nl}</span>
+              <span lang="en">{bodyMap.get(step.num)?.en ?? step.body.en}</span>
             </p>
           </Reveal>
         ))}

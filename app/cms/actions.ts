@@ -1,8 +1,25 @@
 "use server";
 
-import { getWorks, saveWorks, type WorkItem } from "@/lib/cms-store";
+import {
+  getWorks,
+  saveWorks,
+  saveStudio,
+  saveContact,
+  saveProcess,
+  type WorkItem,
+  type StudioData,
+  type ContactData,
+  type ProcessData,
+} from "@/lib/cms-store";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+
+function revalidateSite() {
+  revalidatePath("/");
+  revalidatePath("/about");
+}
+
+// ── Works ────────────────────────────────────────────────────────────────────
 
 function parseForm(fd: FormData): Omit<WorkItem, "id"> {
   const specsJson = fd.get("specs_json") as string;
@@ -49,18 +66,16 @@ export async function createWork(fd: FormData) {
   const item: WorkItem = { id, ...parseForm(fd) };
   const works = getWorks();
   saveWorks([...works, item]);
-  revalidatePath("/");
+  revalidateSite();
   revalidatePath("/cms/dashboard");
   redirect("/cms/dashboard");
 }
 
 export async function updateWork(id: string, fd: FormData) {
   const works = getWorks();
-  const updated = works.map((w) =>
-    w.id === id ? { id, ...parseForm(fd) } : w
-  );
+  const updated = works.map((w) => (w.id === id ? { id, ...parseForm(fd) } : w));
   saveWorks(updated);
-  revalidatePath("/");
+  revalidateSite();
   revalidatePath("/cms/dashboard");
   redirect("/cms/dashboard");
 }
@@ -68,7 +83,7 @@ export async function updateWork(id: string, fd: FormData) {
 export async function deleteWork(id: string) {
   const works = getWorks();
   saveWorks(works.filter((w) => w.id !== id));
-  revalidatePath("/");
+  revalidateSite();
   revalidatePath("/cms/dashboard");
 }
 
@@ -77,6 +92,61 @@ export async function reorderWorks(ids: string[]) {
   const map = new Map(works.map((w) => [w.id, w]));
   const reordered = ids.map((id) => map.get(id)).filter(Boolean) as WorkItem[];
   saveWorks(reordered);
-  revalidatePath("/");
+  revalidateSite();
   revalidatePath("/cms/dashboard");
+}
+
+// ── Studio ───────────────────────────────────────────────────────────────────
+
+export async function updateStudio(fd: FormData) {
+  const bodyJson = fd.get("body_json") as string;
+  const body = bodyJson
+    ? (JSON.parse(bodyJson) as StudioData["body"])
+    : [];
+
+  const data: StudioData = {
+    lede: {
+      nl: (fd.get("lede_nl") as string) ?? "",
+      en: (fd.get("lede_en") as string) ?? "",
+    },
+    body,
+  };
+  saveStudio(data);
+  revalidateSite();
+  revalidatePath("/cms/studio");
+}
+
+// ── Contact ──────────────────────────────────────────────────────────────────
+
+export async function updateContact(fd: FormData) {
+  const channelsJson = fd.get("channels_json") as string;
+  const channels = channelsJson
+    ? (JSON.parse(channelsJson) as ContactData["channels"])
+    : [];
+
+  const data: ContactData = {
+    email: (fd.get("email") as string) ?? "",
+    reply: {
+      nl: (fd.get("reply_nl") as string) ?? "",
+      en: (fd.get("reply_en") as string) ?? "",
+    },
+    channels,
+  };
+  saveContact(data);
+  revalidateSite();
+  revalidatePath("/cms/contact");
+}
+
+// ── Process ──────────────────────────────────────────────────────────────────
+
+export async function updateProcess(fd: FormData) {
+  const stepsJson = fd.get("steps_json") as string;
+  const steps = stepsJson
+    ? (JSON.parse(stepsJson) as ProcessData["steps"])
+    : [];
+
+  const data: ProcessData = { steps };
+  saveProcess(data);
+  revalidateSite();
+  revalidatePath("/cms/process");
 }

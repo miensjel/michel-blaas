@@ -22,6 +22,14 @@ export function LangProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
+    const handler = (e: MessageEvent) => {
+      if (e.data?.lang === "nl" || e.data?.lang === "en") setLangState(e.data.lang);
+    };
+    window.addEventListener("message", handler);
+    return () => window.removeEventListener("message", handler);
+  }, []);
+
+  useEffect(() => {
     document.body.classList.remove("lang-nl", "lang-en");
     document.body.classList.add(`lang-${lang}`);
     document.documentElement.lang = lang;

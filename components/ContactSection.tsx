@@ -1,9 +1,11 @@
 import Reveal from "@/components/Reveal";
 import { home } from "@/content/home";
+import { getContact } from "@/lib/cms-store";
 
 const { contact } = home;
 
 export default function ContactSection() {
+  const cms = getContact();
   return (
     <section
       id="contact"
@@ -34,19 +36,19 @@ export default function ContactSection() {
       <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 48, alignItems: "end" }}>
         <Reveal>
           <a
-            href={`mailto:${contact.email}`}
+            href={`mailto:${cms.email}`}
             style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px,4vw,56px)", fontStyle: "italic", color: "var(--color-text)", textDecoration: "none", borderBottom: "1px solid var(--color-text)", paddingBottom: 8, display: "inline-block", transition: "color 0.3s, border-color 0.3s" }}
           >
-            {contact.email}
+            {cms.email}
           </a>
           <p style={{ marginTop: 24, color: "var(--color-text-soft)", fontFamily: "var(--font-mono)", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.06em" }}>
-            <span lang="nl">{contact.reply.nl}</span>
-            <span lang="en">{contact.reply.en}</span>
+            <span lang="nl">{cms.reply.nl}</span>
+            <span lang="en">{cms.reply.en}</span>
           </p>
         </Reveal>
 
         <Reveal style={{ display: "flex", flexDirection: "column", gap: 14 } as React.CSSProperties}>
-          {contact.channels.map((ch) => (
+          {cms.channels.map((ch) => (
             <a
               key={ch.abbr}
               href={ch.href}

@@ -1,10 +1,12 @@
 import Reveal from "@/components/Reveal";
 import PortraitSVG from "@/components/PortraitSVG";
 import { home } from "@/content/home";
+import { getStudio } from "@/lib/cms-store";
 
 const { studio } = home;
 
 export default function StudioSection() {
+  const cms = getStudio();
   return (
     <section
       id="studio"
@@ -40,12 +42,12 @@ export default function StudioSection() {
 
         <Reveal>
           <p style={{ fontFamily: "var(--font-display)", fontSize: 28, lineHeight: 1.25, letterSpacing: "-0.01em", color: "var(--color-text)", marginBottom: 32 }}>
-            <span lang="nl">{studio.lede.nl}</span>
-            <span lang="en">{studio.lede.en}</span>
+            <span lang="nl">{cms.lede.nl}</span>
+            <span lang="en">{cms.lede.en}</span>
           </p>
 
           <div style={{ fontSize: 15, lineHeight: 1.65, color: "var(--color-text-soft)", maxWidth: "56ch", marginBottom: 40 }}>
-            {studio.body.map((para, i) => (
+            {cms.body.map((para, i) => (
               <p key={i} style={{ marginTop: i > 0 ? 16 : 0 }}>
                 <span lang="nl">{para.nl}</span>
                 <span lang="en">{para.en}</span>

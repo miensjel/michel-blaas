@@ -1,0 +1,27 @@
+{
+  "email": "michelblaas@caiway.net",
+  "reply": {
+    "nl": "Antwoord binnen 48 uur.",
+    "en": "Reply within 48 hours."
+  },
+  "channels": [
+    {
+      "abbr": "IG",
+      "label": { "nl": "@miensjel — projecten en proces", "en": "@miensjel — projects and process" },
+      "href": "#",
+      "arrow": "↗"
+    },
+    {
+      "abbr": "LI",
+      "label": { "nl": "LinkedIn — voor zakelijke opdrachten", "en": "LinkedIn — for business inquiries" },
+      "href": "#",
+      "arrow": "↗"
+    },
+    {
+      "abbr": "E",
+      "label": { "nl": "michelblaas@caiway.net", "en": "michelblaas@caiway.net" },
+      "href": "mailto:michelblaas@caiway.net",
+      "arrow": "→"
+    }
+  ]
+}
