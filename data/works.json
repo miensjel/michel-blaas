@@ -1,0 +1,157 @@
+[
+  {
+    "id": "chair",
+    "model": "chair",
+    "dist": 5,
+    "height": 0.9,
+    "speed": 0.6,
+    "size": "lg",
+    "category": { "nl": "Meubel", "en": "Furniture" },
+    "year": "2026",
+    "title": "Halma",
+    "subtitle": { "nl": "01", "en": "01" },
+    "status": { "nl": "Bachelorproject — prototype", "en": "Bachelor project — prototype" },
+    "body": {
+      "nl": "Een loungestoel gebouwd rond één continue rugcurve. De armleuningen lopen in één lijn door naar de zitting; geen las, geen scharnier. Ontwikkeld als afstudeerproject.",
+      "en": "A lounge chair built around one continuous back curve. The armrests flow uninterrupted into the seat — no weld, no hinge. Developed as a graduation project."
+    },
+    "specs": [
+      { "nl": "Essenhout", "en": "Ash wood" },
+      { "nl": "Linnen 320g", "en": "Linen 320g" },
+      { "nl": "Inklapbaar", "en": "Foldable" }
+    ]
+  },
+  {
+    "id": "lamp",
+    "model": "lamp",
+    "dist": 5,
+    "height": 1.0,
+    "speed": 0.7,
+    "size": "md",
+    "category": { "nl": "Verlichting", "en": "Lighting" },
+    "year": "2025",
+    "title": "Boog",
+    "subtitle": { "nl": "vloerlamp", "en": "floor lamp" },
+    "status": { "nl": "Studieproject", "en": "Student project" },
+    "body": {
+      "nl": "Een 1,1 meter lange overhang in geanodiseerd aluminium. De lampkap kan met de hand in elke hoek vastklikken.",
+      "en": "A 1.1 m overhanging arc in anodised aluminium. The shade clicks into any angle by hand."
+    },
+    "specs": [
+      { "nl": "Aluminium", "en": "Aluminium" },
+      { "nl": "2700K LED", "en": "2700K LED" },
+      { "nl": "3 standen", "en": "3 modes" }
+    ]
+  },
+  {
+    "id": "vase",
+    "model": "vase",
+    "dist": 5.5,
+    "height": 1.3,
+    "speed": 0.8,
+    "size": "md",
+    "category": { "nl": "Keramiek", "en": "Ceramics" },
+    "year": "2025",
+    "title": "Knoop",
+    "subtitle": { "nl": "vaas", "en": "vase" },
+    "status": { "nl": "Handgedraaid", "en": "Hand-thrown" },
+    "body": {
+      "nl": "Drie volumes die elkaar onderbreken — een vorm die voortkomt uit het zoeken naar het kleinste contactpunt tussen klei en pottenbakkersschijf.",
+      "en": "Three volumes interrupting each other — a form that emerges from searching for the smallest possible contact point between clay and wheel."
+    },
+    "specs": [
+      { "nl": "Steengoed", "en": "Stoneware" },
+      { "nl": "Mat glazuur", "en": "Matte glaze" },
+      { "nl": "1,2 kg", "en": "1.2 kg" }
+    ]
+  },
+  {
+    "id": "speaker",
+    "model": "speaker",
+    "dist": 5,
+    "height": 1.1,
+    "speed": 0.7,
+    "size": "lg",
+    "category": { "nl": "Elektronica", "en": "Electronics" },
+    "year": "2024",
+    "title": "Toren",
+    "subtitle": { "nl": "speaker", "en": "speaker" },
+    "status": { "nl": "Concept", "en": "Concept" },
+    "body": {
+      "nl": "360° geluid in een cilinder van 12 cm breed. Eén knop, geen scherm, geen app. Een onderzoek naar de minimale interface voor luisteren.",
+      "en": "360° sound in a 12 cm-wide cylinder. One knob, no screen, no app. A study in the minimal interface for listening."
+    },
+    "specs": [
+      { "nl": "Massief eiken", "en": "Solid oak" },
+      { "nl": "Messing", "en": "Brass" },
+      { "nl": "Bluetooth 5.3", "en": "Bluetooth 5.3" }
+    ]
+  },
+  {
+    "id": "stool",
+    "model": "stool",
+    "dist": 5,
+    "height": 0.9,
+    "speed": 0.7,
+    "size": "sm",
+    "category": { "nl": "Meubel", "en": "Furniture" },
+    "year": "2023",
+    "title": "Cork",
+    "subtitle": { "nl": "06", "en": "06" },
+    "status": { "nl": "Editie van 12", "en": "Edition of 12" },
+    "body": {
+      "nl": "Een lichte kruk uit één blok kurk, op drie eikenhouten poten. Drie poten omdat een kruk niet hoeft te wankelen om eerlijk te zijn.",
+      "en": "A light stool from a single block of cork, on three oak legs. Three legs because a stool doesn't need to wobble to be honest."
+    },
+    "specs": [
+      { "nl": "Kurk", "en": "Cork" },
+      { "nl": "Eiken", "en": "Oak" },
+      { "nl": "2,1 kg", "en": "2.1 kg" }
+    ]
+  },
+  {
+    "id": "kettle",
+    "model": "kettle",
+    "dist": 4.2,
+    "height": 0.7,
+    "speed": 0.6,
+    "size": "sm",
+    "category": { "nl": "Object", "en": "Object" },
+    "year": "2022",
+    "title": "Theefluit",
+    "subtitle": { "nl": "nº 3", "en": "nº 3" },
+    "status": { "nl": "Prototype", "en": "Prototype" },
+    "body": {
+      "nl": "Een ketel die in plaats van te fluiten een lage toon zingt. Een studie naar geluid als signaal.",
+      "en": "A kettle that, instead of whistling, sings a low tone. A study of sound as a signal."
+    },
+    "specs": [
+      { "nl": "Messing", "en": "Brass" },
+      { "nl": "Walnoothout", "en": "Walnut" },
+      { "nl": "1,2 L", "en": "1.2 L" }
+    ]
+  },
+  {
+    "id": "monolith",
+    "model": "monolith",
+    "dist": 5.6,
+    "height": 1.4,
+    "speed": 0.9,
+    "bg": 14867663,
+    "size": "sm",
+    "category": { "nl": "Sculptuur", "en": "Sculpture" },
+    "year": "2026",
+    "title": "Totem",
+    "subtitle": { "nl": "0", "en": "0" },
+    "status": { "nl": "Uniek", "en": "Unique" },
+    "body": {
+      "nl": "Een verticale studie in proportie en materiaal — terracotta, room en messing op één as. Onderdeel van een serie van drie.",
+      "en": "A vertical study in proportion and material — terracotta, cream and brass on one axis. Part of a series of three."
+    },
+    "specs": [
+      { "nl": "Keramiek", "en": "Ceramics" },
+      { "nl": "Messing", "en": "Brass" },
+      { "nl": "1/3", "en": "1/3" }
+    ]
+  }
+]

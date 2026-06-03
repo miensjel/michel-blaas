@@ -257,6 +257,15 @@ export default function Header() {
             <div lang="nl">Interactief portfolio</div>
             <div lang="en">Interactive portfolio</div>
           </div>
+          <div style={{ paddingTop: 6, borderTop: "1px solid rgba(235,229,219,0.08)" }}>
+            <Link
+              href="/cms"
+              onClick={() => setMenuOpen(false)}
+              style={{ color: "rgba(235,229,219,0.3)", textDecoration: "none", fontFamily: "var(--font-mono)", fontSize: 9, letterSpacing: "0.12em", textTransform: "uppercase" }}
+            >
+              ⚙ CMS
+            </Link>
+          </div>
         </footer>
       </aside>
     </>
