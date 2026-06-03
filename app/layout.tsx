@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { LangProvider } from "@/lib/lang-context";
+import { CmsEditProvider } from "@/lib/cms-edit-context";
 
 const geistSans = Geist({
   variable: "--geist-sans",
@@ -42,7 +43,9 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
-        <LangProvider>{children}</LangProvider>
+        <LangProvider>
+          <CmsEditProvider>{children}</CmsEditProvider>
+        </LangProvider>
       </body>
     </html>
   );

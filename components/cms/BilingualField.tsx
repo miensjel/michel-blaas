@@ -46,12 +46,14 @@ export default function BilingualField({
   type = "textarea",
 }: Props) {
   const [loadingDir, setLoadingDir] = useState<"nl" | "en" | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   async function translate(from: "nl" | "en") {
     const text = from === "nl" ? valueNl : valueEn;
     const to = from === "nl" ? "en" : "nl";
     if (!text.trim()) return;
     setLoadingDir(to);
+    setError(null);
     try {
       const res = await fetch("/api/translate", {
         method: "POST",
@@ -62,7 +64,11 @@ export default function BilingualField({
       if (data.translation) {
         if (to === "nl") onChangeNl(data.translation);
         else onChangeEn(data.translation);
+      } else {
+        setError(data.error ?? "Vertaling mislukt");
       }
+    } catch {
+      setError("Vertaling mislukt — controleer je API-sleutel");
     } finally {
       setLoadingDir(null);
     }
@@ -158,6 +164,9 @@ export default function BilingualField({
         {renderField("nl", nameNl, valueNl, onChangeNl)}
         {renderField("en", nameEn, valueEn, onChangeEn)}
       </div>
+      {error && (
+        <p style={{ ...mono, fontSize: 9, color: "#e07070", marginTop: 6 }}>{error}</p>
+      )}
     </div>
   );
 }

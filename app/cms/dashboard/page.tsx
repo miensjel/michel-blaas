@@ -1,6 +1,6 @@
 import { getWorks } from "@/lib/cms-store";
 import Link from "next/link";
-import DeleteWorkButton from "@/components/cms/DeleteWorkButton";
+import WorksList from "@/components/cms/WorksList";
 
 export const dynamic = "force-dynamic";
 
@@ -61,102 +61,7 @@ export default function CmsDashboard() {
         </Link>
       </div>
 
-      <div style={{ borderTop: "1px solid var(--color-text)" }}>
-        {works.length === 0 && (
-          <p
-            style={{
-              padding: "28px 0",
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              color: "var(--color-muted)",
-            }}
-          >
-            Geen werken. Voeg je eerste werk toe ↑
-          </p>
-        )}
-
-        {works.map((work, i) => (
-          <div
-            key={work.id}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "28px 1fr 70px 70px 70px",
-              alignItems: "center",
-              gap: 14,
-              padding: "12px 0",
-              borderBottom: "1px solid var(--color-rule)",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 10,
-                color: "var(--color-muted)",
-                letterSpacing: "0.1em",
-              }}
-            >
-              {String(i + 1).padStart(2, "0")}
-            </span>
-
-            <div>
-              <div
-                style={{
-                  fontFamily: "var(--font-sans)",
-                  fontSize: 14,
-                  fontWeight: 500,
-                  color: "var(--color-text)",
-                  marginBottom: 2,
-                }}
-              >
-                {work.title}
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 9,
-                  color: "var(--color-muted)",
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                }}
-              >
-                {work.category.nl} · {work.year}
-              </div>
-            </div>
-
-            <span
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 9,
-                color: "var(--color-muted)",
-                textTransform: "uppercase",
-                letterSpacing: "0.06em",
-              }}
-            >
-              {work.model}
-            </span>
-
-            <Link
-              href={`/cms/works/${work.id}`}
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 9,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "var(--color-text)",
-                textDecoration: "none",
-                padding: "6px 10px",
-                border: "1px solid var(--color-text)",
-                display: "inline-block",
-                textAlign: "center",
-              }}
-            >
-              Bewerk
-            </Link>
-
-            <DeleteWorkButton id={work.id} />
-          </div>
-        ))}
-      </div>
+      <WorksList initialWorks={works} />
 
       <p
         style={{

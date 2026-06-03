@@ -1,4 +1,4 @@
-import WorkCard from "@/components/WorkCard";
+import WorksGrid from "@/components/WorksGrid";
 import Reveal from "@/components/Reveal";
 import { home } from "@/content/home";
 import { getWorks } from "@/lib/cms-store";
@@ -36,11 +36,7 @@ export default function WorksSection() {
         </span>
       </Reveal>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: "24px 24px" }}>
-        {items.map((item) => (
-          <WorkCard key={item.id} item={item} />
-        ))}
-      </div>
+      <WorksGrid initialItems={items} />
     </section>
   );
 }
