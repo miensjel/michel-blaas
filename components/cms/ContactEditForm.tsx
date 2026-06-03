@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useActionState } from "react";
 import type { ContactData } from "@/lib/cms-store";
+import BilingualField from "./BilingualField";
+import SubmitButton from "./SubmitButton";
 
 type Channel = ContactData["channels"][number];
 
@@ -17,7 +19,7 @@ const fieldStyle: React.CSSProperties = {
   boxSizing: "border-box",
 };
 
-const labelStyle: React.CSSProperties = {
+const monoLabel: React.CSSProperties = {
   fontFamily: "var(--font-mono)",
   fontSize: 9,
   letterSpacing: "0.1em",
@@ -32,19 +34,28 @@ export default function ContactEditForm({
   action,
 }: {
   data: ContactData;
-  action: (fd: FormData) => Promise<void>;
+  action: (_prev: unknown, fd: FormData) => Promise<{ ok: boolean }>;
 }) {
+  const [email, setEmail] = useState(data.email);
+  const [reply, setReply] = useState(data.reply);
   const [channels, setChannels] = useState<Channel[]>(data.channels);
 
-  function addChannel() {
-    setChannels((c) => [...c, { abbr: "", label: { nl: "", en: "" }, href: "", arrow: "↗" }]);
-  }
+  const [state, formAction] = useActionState(action, null);
 
+  function addChannel() {
+    setChannels((c) => [
+      ...c,
+      { abbr: "", label: { nl: "", en: "" }, href: "", arrow: "↗" },
+    ]);
+  }
   function removeChannel(i: number) {
     setChannels((c) => c.filter((_, j) => j !== i));
   }
-
-  function updateChannel(i: number, key: keyof Channel | "label_nl" | "label_en", val: string) {
+  function updateChannel(
+    i: number,
+    key: keyof Channel | "label_nl" | "label_en",
+    val: string
+  ) {
     setChannels((c) =>
       c.map((ch, j) => {
         if (j !== i) return ch;
@@ -56,35 +67,50 @@ export default function ContactEditForm({
   }
 
   return (
-    <form action={action} style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+    <form action={formAction} style={{ display: "flex", flexDirection: "column", gap: 28 }}>
       <input type="hidden" name="channels_json" value={JSON.stringify(channels)} />
 
-      {/* Email */}
       <div>
-        <span style={{ ...labelStyle, fontSize: 10, color: "var(--color-text)" }}>E-mail</span>
-        <input name="email" defaultValue={data.email} style={fieldStyle} />
+        <span
+          style={{
+            ...monoLabel,
+            fontSize: 10,
+            color: "var(--color-text)",
+            marginBottom: 8,
+          }}
+        >
+          E-mail
+        </span>
+        <input
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={fieldStyle}
+        />
       </div>
 
-      {/* Reply */}
-      <section>
-        <p style={{ ...labelStyle, fontSize: 10, marginBottom: 14, color: "var(--color-text)" }}>
-          Reactietijd
-        </p>
-        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-          <div>
-            <span style={labelStyle}>NL</span>
-            <input name="reply_nl" defaultValue={data.reply.nl} style={fieldStyle} />
-          </div>
-          <div>
-            <span style={labelStyle}>EN</span>
-            <input name="reply_en" defaultValue={data.reply.en} style={fieldStyle} />
-          </div>
-        </div>
-      </section>
+      <BilingualField
+        label="Reactietijd"
+        nameNl="reply_nl"
+        nameEn="reply_en"
+        valueNl={reply.nl}
+        valueEn={reply.en}
+        onChangeNl={(v) => setReply((r) => ({ ...r, nl: v }))}
+        onChangeEn={(v) => setReply((r) => ({ ...r, en: v }))}
+        type="input"
+      />
 
-      {/* Channels */}
       <section>
-        <p style={{ ...labelStyle, fontSize: 10, marginBottom: 14, color: "var(--color-text)" }}>
+        <p
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: 10,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            color: "var(--color-text)",
+            marginBottom: 14,
+          }}
+        >
           Kanalen
         </p>
         <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -99,19 +125,34 @@ export default function ContactEditForm({
                 gap: 10,
               }}
             >
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <span style={{ ...labelStyle, marginBottom: 0 }}>Kanaal {i + 1}</span>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <span style={{ ...monoLabel, marginBottom: 0 }}>Kanaal {i + 1}</span>
                 <button
                   type="button"
                   onClick={() => removeChannel(i)}
-                  style={{ background: "none", border: "none", cursor: "pointer", color: "var(--color-muted)", fontFamily: "var(--font-mono)", fontSize: 9, letterSpacing: "0.08em", textTransform: "uppercase" }}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 9,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    color: "var(--color-muted)",
+                  }}
                 >
                   Verwijder
                 </button>
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "60px 1fr 40px", gap: 10 }}>
                 <div>
-                  <span style={labelStyle}>Afk.</span>
+                  <span style={monoLabel}>Afk.</span>
                   <input
                     value={ch.abbr}
                     onChange={(e) => updateChannel(i, "abbr", e.target.value)}
@@ -120,7 +161,7 @@ export default function ContactEditForm({
                   />
                 </div>
                 <div>
-                  <span style={labelStyle}>URL</span>
+                  <span style={monoLabel}>URL</span>
                   <input
                     value={ch.href}
                     onChange={(e) => updateChannel(i, "href", e.target.value)}
@@ -128,7 +169,7 @@ export default function ContactEditForm({
                   />
                 </div>
                 <div>
-                  <span style={labelStyle}>Pijl</span>
+                  <span style={monoLabel}>Pijl</span>
                   <input
                     value={ch.arrow}
                     onChange={(e) => updateChannel(i, "arrow", e.target.value)}
@@ -137,22 +178,16 @@ export default function ContactEditForm({
                   />
                 </div>
               </div>
-              <div>
-                <span style={labelStyle}>Label NL</span>
-                <input
-                  value={ch.label.nl}
-                  onChange={(e) => updateChannel(i, "label_nl", e.target.value)}
-                  style={fieldStyle}
-                />
-              </div>
-              <div>
-                <span style={labelStyle}>Label EN</span>
-                <input
-                  value={ch.label.en}
-                  onChange={(e) => updateChannel(i, "label_en", e.target.value)}
-                  style={fieldStyle}
-                />
-              </div>
+              <BilingualField
+                nameNl={`ch_${i}_label_nl`}
+                nameEn={`ch_${i}_label_en`}
+                valueNl={ch.label.nl}
+                valueEn={ch.label.en}
+                onChangeNl={(v) => updateChannel(i, "label_nl", v)}
+                onChangeEn={(v) => updateChannel(i, "label_en", v)}
+                type="input"
+                label="Label"
+              />
             </div>
           ))}
         </div>
@@ -177,23 +212,22 @@ export default function ContactEditForm({
         </button>
       </section>
 
-      <button
-        type="submit"
-        style={{
-          padding: "11px 24px",
-          background: "var(--color-text)",
-          color: "var(--color-bg)",
-          fontFamily: "var(--font-mono)",
-          fontSize: 10,
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
-          border: "none",
-          cursor: "pointer",
-          alignSelf: "flex-start",
-        }}
-      >
-        Opslaan
-      </button>
+      <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+        <SubmitButton />
+        {state?.ok && (
+          <span
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 9,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "var(--color-accent)",
+            }}
+          >
+            ✓ Opgeslagen
+          </span>
+        )}
+      </div>
     </form>
   );
 }

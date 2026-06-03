@@ -23,7 +23,18 @@ export function LangProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const handler = (e: MessageEvent) => {
-      if (e.data?.lang === "nl" || e.data?.lang === "en") setLangState(e.data.lang);
+      if (e.data?.lang === "nl" || e.data?.lang === "en") {
+        setLangState(e.data.lang);
+      }
+      if (e.data?.action === "scrollTo") {
+        const id: string = e.data.id;
+        if (!id || id === "top") {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          const el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
     };
     window.addEventListener("message", handler);
     return () => window.removeEventListener("message", handler);

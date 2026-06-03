@@ -98,12 +98,12 @@ export async function reorderWorks(ids: string[]) {
 
 // ── Studio ───────────────────────────────────────────────────────────────────
 
-export async function updateStudio(fd: FormData) {
+export async function updateStudio(
+  _prev: unknown,
+  fd: FormData
+): Promise<{ ok: boolean }> {
   const bodyJson = fd.get("body_json") as string;
-  const body = bodyJson
-    ? (JSON.parse(bodyJson) as StudioData["body"])
-    : [];
-
+  const body = bodyJson ? (JSON.parse(bodyJson) as StudioData["body"]) : [];
   const data: StudioData = {
     lede: {
       nl: (fd.get("lede_nl") as string) ?? "",
@@ -114,16 +114,19 @@ export async function updateStudio(fd: FormData) {
   saveStudio(data);
   revalidateSite();
   revalidatePath("/cms/studio");
+  return { ok: true };
 }
 
 // ── Contact ──────────────────────────────────────────────────────────────────
 
-export async function updateContact(fd: FormData) {
+export async function updateContact(
+  _prev: unknown,
+  fd: FormData
+): Promise<{ ok: boolean }> {
   const channelsJson = fd.get("channels_json") as string;
   const channels = channelsJson
     ? (JSON.parse(channelsJson) as ContactData["channels"])
     : [];
-
   const data: ContactData = {
     email: (fd.get("email") as string) ?? "",
     reply: {
@@ -135,18 +138,20 @@ export async function updateContact(fd: FormData) {
   saveContact(data);
   revalidateSite();
   revalidatePath("/cms/contact");
+  return { ok: true };
 }
 
 // ── Process ──────────────────────────────────────────────────────────────────
 
-export async function updateProcess(fd: FormData) {
+export async function updateProcess(
+  _prev: unknown,
+  fd: FormData
+): Promise<{ ok: boolean }> {
   const stepsJson = fd.get("steps_json") as string;
-  const steps = stepsJson
-    ? (JSON.parse(stepsJson) as ProcessData["steps"])
-    : [];
-
+  const steps = stepsJson ? (JSON.parse(stepsJson) as ProcessData["steps"]) : [];
   const data: ProcessData = { steps };
   saveProcess(data);
   revalidateSite();
   revalidatePath("/cms/process");
+  return { ok: true };
 }

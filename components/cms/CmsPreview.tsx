@@ -1,10 +1,12 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
-export default function CmsPreview() {
+export default function CmsPreview({ href }: { href: string }) {
   const [lang, setLang] = useState<"nl" | "en">("nl");
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const hrefRef = useRef(href);
+  hrefRef.current = href;
 
   function sendLang(l: "nl" | "en") {
     setLang(l);
@@ -14,6 +16,32 @@ export default function CmsPreview() {
   function refresh() {
     const iframe = iframeRef.current;
     if (iframe) iframe.src = iframe.src;
+  }
+
+  function scrollToSection(h: string) {
+    const hash = h.includes("#") ? h.split("#")[1] : "";
+    iframeRef.current?.contentWindow?.postMessage(
+      { action: "scrollTo", id: hash || "top" },
+      "*"
+    );
+  }
+
+  // Navigate preview when the CMS section changes
+  useEffect(() => {
+    scrollToSection(href);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [href]);
+
+  // After iframe finishes loading, scroll to the target section
+  function handleLoad() {
+    const hash = hrefRef.current.includes("#") ? hrefRef.current.split("#")[1] : "";
+    if (!hash) return;
+    setTimeout(() => {
+      iframeRef.current?.contentWindow?.postMessage(
+        { action: "scrollTo", id: hash },
+        "*"
+      );
+    }, 250);
   }
 
   return (
@@ -96,6 +124,7 @@ export default function CmsPreview() {
       <iframe
         ref={iframeRef}
         src="/"
+        onLoad={handleLoad}
         style={{ flex: 1, border: "none", width: "100%" }}
         title="Site preview"
       />

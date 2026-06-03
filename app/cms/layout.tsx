@@ -4,10 +4,20 @@ import { usePathname } from "next/navigation";
 import CmsSidebar from "@/components/cms/CmsSidebar";
 import CmsPreview from "@/components/cms/CmsPreview";
 
+function getPreviewHref(pathname: string): string {
+  if (pathname === "/cms/dashboard" || pathname.startsWith("/cms/works")) return "/#werk";
+  if (pathname.startsWith("/cms/studio")) return "/#studio";
+  if (pathname.startsWith("/cms/contact")) return "/#contact";
+  if (pathname.startsWith("/cms/process")) return "/#proces";
+  return "/";
+}
+
 export default function CmsLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   if (pathname === "/cms") return <>{children}</>;
+
+  const previewHref = getPreviewHref(pathname);
 
   return (
     <div style={{ display: "flex", height: "100dvh", overflow: "hidden" }}>
@@ -24,7 +34,7 @@ export default function CmsLayout({ children }: { children: React.ReactNode }) {
         {children}
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
-        <CmsPreview />
+        <CmsPreview href={previewHref} />
       </div>
     </div>
   );
